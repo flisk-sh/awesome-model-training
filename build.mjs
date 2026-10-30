@@ -7,7 +7,7 @@ const list = JSON.parse(readFileSync("list.json", "utf-8"));
 const checkOnly = process.argv.includes("--check");
 let token = process.env.GITHUB_TOKEN;
 if (!token) { try { token = execFileSync("gh", ["auth", "token"], { encoding: "utf-8" }).trim(); } catch { /* unauthenticated: low rate limit */ } }
-const gh = { "user-agent": "awesome-small-model-training", accept: "application/vnd.github+json", ...(token ? { authorization: `Bearer ${token}` } : {}) };
+const gh = { "user-agent": "awesome-model-training", accept: "application/vnd.github+json", ...(token ? { authorization: `Bearer ${token}` } : {}) };
 const stars = (n) => (n >= 1000 ? `${(n / 1000).toFixed(n >= 10000 ? 0 : 1)}k` : String(n));
 const day = (iso) => (iso ? iso.slice(0, 10) : "?");
 const problems = [];
@@ -34,7 +34,7 @@ async function link(item) {
   return { name: item.name, url: item.id };
 }
 
-let out = `# awesome-small-model-training
+let out = `# awesome-model-training
 
 Free, open tools for training and shipping **small specialist models**, with the facts read from the live source and re-checked by a script. Licence, stars and last-updated date are not typed by hand.
 

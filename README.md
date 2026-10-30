@@ -1,4 +1,4 @@
-# awesome-small-model-training
+# awesome-model-training
 
 Free, open tools for training and shipping **small specialist models**, with the facts read from the live source and re-checked by a script. Licence, stars and last-updated date are not typed by hand.
 
