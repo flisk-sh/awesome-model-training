@@ -42,6 +42,8 @@ Free, open tools for training and shipping **small specialist models**, with the
 
 Last checked: ${new Date().toISOString().slice(0, 10)} · [How the list stays honest](#how-it-stays-honest)
 
+<!--TOC-->
+
 `;
 for (const sec of list.sections) {
   out += `## ${sec.title}\n\n${sec.blurb ? sec.blurb + "\n\n" : ""}`;
@@ -72,6 +74,8 @@ From training a 1.5B model on a MacBook ([full numbers and failures](https://git
 
 [MIT](LICENSE)
 `;
+const slug = (t) => t.toLowerCase().replace(/[^a-z0-9 -]/g, "").replace(/ /g, "-");
+out = out.replace("<!--TOC-->", "**Contents:** " + [...list.sections.map((x) => x.title), "Lessons from a real run"].map((t) => `[${t}](#${slug(t)})`).join(" · "));
 if (problems.length) { console.error("Problems:\n  " + problems.join("\n  ")); if (checkOnly) process.exit(1); }
 if (!checkOnly) { writeFileSync("README.md", out); console.log(`README.md written (${list.sections.reduce((n, s) => n + s.items.length, 0)} entries, ${problems.length} problems)`); }
 else console.log("all entries verified");

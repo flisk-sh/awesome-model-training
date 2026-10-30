@@ -5,9 +5,22 @@
       "blurb": "Everything here runs on a MacBook with 16 GB. This is what the Flisk model was trained with.",
       "kind": "repo",
       "items": [
-        { "id": "ml-explore/mlx-lm", "what": "Fine-tune (LoRA, QLoRA, DoRA), fuse, quantize and serve LLMs on Apple Silicon. The tool behind the worked example below." },
-        { "id": "ml-explore/mlx", "what": "The array framework under it: NumPy-like, runs on the Mac GPU with unified memory." },
-        { "id": "ml-explore/mlx-examples", "what": "Worked examples for MLX, from text generation to fine-tuning." }
+        {
+          "id": "ml-explore/mlx-lm",
+          "what": "Fine-tune (LoRA, QLoRA, DoRA), fuse, quantize and serve LLMs on Apple Silicon. The tool behind the worked example below."
+        },
+        {
+          "id": "ml-explore/mlx",
+          "what": "The array framework under it: NumPy-like, runs on the Mac GPU with unified memory."
+        },
+        {
+          "id": "ml-explore/mlx-examples",
+          "what": "Worked examples for MLX, from text generation to fine-tuning."
+        },
+        {
+          "id": "apple/corenet",
+          "what": "Apple's own toolkit for training small and large models, for language and vision."
+        }
       ]
     },
     {
@@ -15,12 +28,34 @@
       "blurb": "Pick one. They all do LoRA/QLoRA; they differ in speed, memory use and how much they hide.",
       "kind": "repo",
       "items": [
-        { "id": "unslothai/unsloth", "what": "Fast, low-memory LoRA training with free Colab and Kaggle notebooks." },
-        { "id": "huggingface/peft", "what": "The standard library for LoRA and other parameter-efficient methods." },
-        { "id": "huggingface/trl", "what": "Supervised fine-tuning plus preference methods (DPO and friends) on top of PEFT." },
-        { "id": "axolotl-ai-cloud/axolotl", "what": "Config-file driven fine-tuning of many models, single GPU to multi-GPU." },
-        { "id": "hiyouga/LlamaFactory", "what": "A broad fine-tuning toolkit with a web UI, for many model families." },
-        { "id": "meta-pytorch/torchtune", "what": "PyTorch-native, readable fine-tuning recipes." }
+        {
+          "id": "unslothai/unsloth",
+          "what": "Fast, low-memory LoRA training with free Colab and Kaggle notebooks."
+        },
+        {
+          "id": "huggingface/peft",
+          "what": "The standard library for LoRA and other parameter-efficient methods."
+        },
+        {
+          "id": "huggingface/trl",
+          "what": "Supervised fine-tuning plus preference methods (DPO and friends) on top of PEFT."
+        },
+        {
+          "id": "axolotl-ai-cloud/axolotl",
+          "what": "Config-file driven fine-tuning of many models, single GPU to multi-GPU."
+        },
+        {
+          "id": "hiyouga/LlamaFactory",
+          "what": "A broad fine-tuning toolkit with a web UI, for many model families."
+        },
+        {
+          "id": "meta-pytorch/torchtune",
+          "what": "PyTorch-native, readable fine-tuning recipes."
+        },
+        {
+          "id": "huggingface/autotrain-advanced",
+          "what": "Fine-tune models with a config file or a UI and little code."
+        }
       ]
     },
     {
@@ -28,9 +63,18 @@
       "blurb": "Turning a trained model into something people can call.",
       "kind": "repo",
       "items": [
-        { "id": "ggml-org/llama.cpp", "what": "Run models on CPU and GPU, convert to GGUF, quantize, and constrain output with grammars." },
-        { "id": "ollama/ollama", "what": "One-command local model server with an OpenAI-compatible API and a Modelfile format." },
-        { "id": "vllm-project/vllm", "what": "High-throughput GPU serving engine." }
+        {
+          "id": "ggml-org/llama.cpp",
+          "what": "Run models on CPU and GPU, convert to GGUF, quantize, and constrain output with grammars."
+        },
+        {
+          "id": "ollama/ollama",
+          "what": "One-command local model server with an OpenAI-compatible API and a Modelfile format."
+        },
+        {
+          "id": "vllm-project/vllm",
+          "what": "High-throughput GPU serving engine."
+        }
       ]
     },
     {
@@ -38,9 +82,18 @@
       "blurb": "For structured answers such as JSON or config files, force the output to match a schema instead of hoping.",
       "kind": "repo",
       "items": [
-        { "id": "dottxt-ai/outlines", "what": "Structured generation: constrain a model to a JSON schema, regex or grammar." },
-        { "id": "guidance-ai/llguidance", "what": "Fast constrained decoding engine used by several serving stacks." },
-        { "id": "mlc-ai/xgrammar", "what": "Efficient grammar-constrained decoding for LLM serving." }
+        {
+          "id": "dottxt-ai/outlines",
+          "what": "Structured generation: constrain a model to a JSON schema, regex or grammar."
+        },
+        {
+          "id": "guidance-ai/llguidance",
+          "what": "Fast constrained decoding engine used by several serving stacks."
+        },
+        {
+          "id": "mlc-ai/xgrammar",
+          "what": "Efficient grammar-constrained decoding for LLM serving."
+        }
       ]
     },
     {
@@ -48,16 +101,159 @@
       "blurb": "A model you cannot measure is a model you cannot improve.",
       "kind": "repo",
       "items": [
-        { "id": "EleutherAI/lm-evaluation-harness", "what": "The standard harness for benchmarking language models." },
-        { "id": "huggingface/lighteval", "what": "Lightweight evaluation toolkit from Hugging Face." }
+        {
+          "id": "EleutherAI/lm-evaluation-harness",
+          "what": "The standard harness for benchmarking language models."
+        },
+        {
+          "id": "huggingface/lighteval",
+          "what": "Lightweight evaluation toolkit from Hugging Face."
+        }
+      ]
+    },
+    {
+      "title": "More ways to evaluate",
+      "blurb": "Beyond the general harnesses above, these fit code and structured-output models.",
+      "kind": "repo",
+      "items": [
+        {
+          "id": "evalplus/evalplus",
+          "what": "Stricter evaluation of code-generation models."
+        },
+        {
+          "id": "bigcode-project/bigcode-evaluation-harness",
+          "what": "A framework for evaluating code-generation language models."
+        },
+        {
+          "id": "confident-ai/deepeval",
+          "what": "Unit-test style evaluation for LLM applications."
+        },
+        {
+          "id": "deepchecks/deepchecks",
+          "what": "Test and validate data and models, from research to production."
+        }
       ]
     },
     {
       "title": "Data",
       "kind": "repo",
       "items": [
-        { "id": "huggingface/datasets", "what": "Load, share and process datasets of any size." },
-        { "id": "argilla-io/distilabel", "what": "Build synthetic datasets and feedback pipelines for fine-tuning." }
+        {
+          "id": "huggingface/datasets",
+          "what": "Load, share and process datasets of any size."
+        },
+        {
+          "id": "argilla-io/distilabel",
+          "what": "Build synthetic datasets and feedback pipelines for fine-tuning."
+        }
+      ]
+    },
+    {
+      "title": "Track experiments and version data",
+      "blurb": "Training runs are easy to lose. These keep a record of what you ran, on which data, with which result.",
+      "kind": "repo",
+      "items": [
+        {
+          "id": "mlflow/mlflow",
+          "what": "Track runs and metrics, package models, and keep a model registry."
+        },
+        {
+          "id": "treeverse/dvc",
+          "what": "Version datasets and models alongside your code, like git for data."
+        },
+        {
+          "id": "aimhubio/aim",
+          "what": "A fast, self-hosted experiment tracker with a good comparison UI."
+        },
+        {
+          "id": "clearml/clearml",
+          "what": "Experiment tracking, orchestration and data management in one open-source suite."
+        },
+        {
+          "id": "iterative/cml",
+          "what": "Run training and report results from CI, so every pull request shows its metrics."
+        },
+        {
+          "id": "treeverse/lakeFS",
+          "what": "Git-like branches and commits for the data lake behind your training data."
+        },
+        {
+          "id": "kitops-ml/kitops",
+          "what": "Package a model, its data and code as one versioned, shareable artifact."
+        }
+      ]
+    },
+    {
+      "title": "Label and generate data",
+      "blurb": "Good data beats a bigger model. Tools for labelling, cleaning and synthesising it.",
+      "kind": "repo",
+      "items": [
+        {
+          "id": "argilla-io/argilla",
+          "what": "Collaborative labelling and feedback for LLM and NLP data."
+        },
+        {
+          "id": "HumanSignal/label-studio",
+          "what": "A flexible open-source labelling tool for text, audio, images and more."
+        },
+        {
+          "id": "cleanlab/cleanlab",
+          "what": "Find label errors and bad examples in a dataset automatically."
+        },
+        {
+          "id": "NVIDIA-NeMo/Curator",
+          "what": "Scalable data curation: filter, deduplicate and prepare training data."
+        },
+        {
+          "id": "sdv-dev/SDV",
+          "what": "Generate realistic synthetic tabular data from a real dataset."
+        }
+      ]
+    },
+    {
+      "title": "Shrink and compress models",
+      "blurb": "Smaller models run on cheaper hardware. Quantization is the usual first step.",
+      "kind": "repo",
+      "items": [
+        {
+          "id": "mit-han-lab/llm-awq",
+          "what": "Activation-aware 4-bit quantization for LLMs."
+        },
+        {
+          "id": "huggingface/optimum-quanto",
+          "what": "Simple quantization for PyTorch and Transformers models."
+        },
+        {
+          "id": "ggml-org/ggml",
+          "what": "The tensor library under llama.cpp, with its own quantization formats."
+        },
+        {
+          "id": "intel/neural-compressor",
+          "what": "Quantization, pruning and distillation toolkit for many frameworks."
+        },
+        {
+          "id": "onnx/onnx",
+          "what": "An open format for moving models between frameworks and runtimes."
+        }
+      ]
+    },
+    {
+      "title": "Serve in production",
+      "blurb": "Once a model works, put it behind a reliable API.",
+      "kind": "repo",
+      "items": [
+        {
+          "id": "bentoml/BentoML",
+          "what": "Package a model as a service and deploy it anywhere."
+        },
+        {
+          "id": "exo-explore/exo",
+          "what": "Run a large model across your own devices, Macs included."
+        },
+        {
+          "id": "dstackai/dstack",
+          "what": "An open-source way to provision cloud GPUs for training and serving, without being tied to one provider."
+        }
       ]
     },
     {
@@ -65,19 +261,40 @@
       "blurb": "Licence column is read from each model's own card. Check it before you sell anything built on a model.",
       "kind": "model",
       "items": [
-        { "id": "Qwen/Qwen2.5-Coder-1.5B-Instruct", "what": "Small coding model. Fine-tuned in the worked example below." },
-        { "id": "Qwen/Qwen2.5-Coder-7B-Instruct", "what": "Larger coding sibling." },
-        { "id": "Qwen/Qwen2.5-Coder-3B-Instruct", "what": "The middle size. Note its licence is different from the other two." },
-        { "id": "HuggingFaceTB/SmolLM2-1.7B-Instruct", "what": "Small general model built for on-device use." },
-        { "id": "microsoft/Phi-4-mini-instruct", "what": "Small reasoning-leaning model from Microsoft." }
+        {
+          "id": "Qwen/Qwen2.5-Coder-1.5B-Instruct",
+          "what": "Small coding model. Fine-tuned in the worked example below."
+        },
+        {
+          "id": "Qwen/Qwen2.5-Coder-7B-Instruct",
+          "what": "Larger coding sibling."
+        },
+        {
+          "id": "Qwen/Qwen2.5-Coder-3B-Instruct",
+          "what": "The middle size. Note its licence is different from the other two."
+        },
+        {
+          "id": "HuggingFaceTB/SmolLM2-1.7B-Instruct",
+          "what": "Small general model built for on-device use."
+        },
+        {
+          "id": "microsoft/Phi-4-mini-instruct",
+          "what": "Small reasoning-leaning model from Microsoft."
+        }
       ]
     },
     {
       "title": "Learn how it works",
       "kind": "repo",
       "items": [
-        { "id": "karpathy/nanoGPT", "what": "The simplest, fastest repo for training and fine-tuning medium-sized GPTs." },
-        { "id": "rasbt/LLMs-from-scratch", "what": "Build a GPT-style model step by step, with code and explanations." }
+        {
+          "id": "karpathy/nanoGPT",
+          "what": "The simplest, fastest repo for training and fine-tuning medium-sized GPTs."
+        },
+        {
+          "id": "rasbt/LLMs-from-scratch",
+          "what": "Build a GPT-style model step by step, with code and explanations."
+        }
       ]
     },
     {
@@ -85,9 +302,21 @@
       "blurb": "Free tiers change often, so check the current limits before you plan around them.",
       "kind": "link",
       "items": [
-        { "id": "https://colab.research.google.com", "name": "Google Colab", "what": "Free notebooks with a GPU for short sessions. Many fine-tuning notebooks run here." },
-        { "id": "https://www.kaggle.com/docs/notebooks", "name": "Kaggle Notebooks", "what": "Free GPU hours per week in the browser." },
-        { "id": "https://huggingface.co/learn/llm-course", "name": "Hugging Face LLM course", "what": "A free course on transformers, fine-tuning and evaluation." }
+        {
+          "id": "https://colab.research.google.com",
+          "name": "Google Colab",
+          "what": "Free notebooks with a GPU for short sessions. Many fine-tuning notebooks run here."
+        },
+        {
+          "id": "https://www.kaggle.com/docs/notebooks",
+          "name": "Kaggle Notebooks",
+          "what": "Free GPU hours per week in the browser."
+        },
+        {
+          "id": "https://huggingface.co/learn/llm-course",
+          "name": "Hugging Face LLM course",
+          "what": "A free course on transformers, fine-tuning and evaluation."
+        }
       ]
     },
     {
@@ -95,7 +324,21 @@
       "blurb": "A full small-model project with its numbers published, including the failures.",
       "kind": "repo",
       "items": [
-        { "id": "flisk-sh/flisk-model", "what": "Trains a 1.5B model on a MacBook to write Flisk config files, graded by the real validator, with Claude, Qwen and prompted baselines." }
+        {
+          "id": "flisk-sh/flisk-model",
+          "what": "Trains a 1.5B model on a MacBook to write Flisk config files, graded by the real validator, with Claude, Qwen and prompted baselines."
+        }
+      ]
+    },
+    {
+      "title": "Related lists",
+      "blurb": "Other curated lists worth knowing.",
+      "kind": "repo",
+      "items": [
+        {
+          "id": "EthicalML/awesome-production-machine-learning",
+          "what": "A large curated list of open-source tools for production machine learning: serving, monitoring, data pipelines and more. Several entries above were found through it."
+        }
       ]
     }
   ]

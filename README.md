@@ -6,6 +6,8 @@ Free, open tools for training and shipping **small specialist models**, with the
 
 Last checked: 2026-10-30 · [How the list stays honest](#how-it-stays-honest)
 
+**Contents:** [Train on a Mac (Apple Silicon)](#train-on-a-mac-apple-silicon) · [Fine-tuning libraries](#fine-tuning-libraries) · [Run, quantize and serve](#run-quantize-and-serve) · [Make the output valid](#make-the-output-valid) · [Test your model](#test-your-model) · [More ways to evaluate](#more-ways-to-evaluate) · [Data](#data) · [Track experiments and version data](#track-experiments-and-version-data) · [Label and generate data](#label-and-generate-data) · [Shrink and compress models](#shrink-and-compress-models) · [Serve in production](#serve-in-production) · [Small open models with a clear licence](#small-open-models-with-a-clear-licence) · [Learn how it works](#learn-how-it-works) · [Free compute](#free-compute) · [Worked example](#worked-example) · [Related lists](#related-lists) · [Lessons from a real run](#lessons-from-a-real-run)
+
 ## Train on a Mac (Apple Silicon)
 
 Everything here runs on a MacBook with 16 GB. This is what the Flisk model was trained with.
@@ -15,6 +17,7 @@ Everything here runs on a MacBook with 16 GB. This is what the Flisk model was t
 | [ml-explore/mlx-lm](https://github.com/ml-explore/mlx-lm) | Fine-tune (LoRA, QLoRA, DoRA), fuse, quantize and serve LLMs on Apple Silicon. The tool behind the worked example below. | MIT | 7.5k | 2026-10-30 |
 | [ml-explore/mlx](https://github.com/ml-explore/mlx) | The array framework under it: NumPy-like, runs on the Mac GPU with unified memory. | MIT | 29k | 2026-10-30 |
 | [ml-explore/mlx-examples](https://github.com/ml-explore/mlx-examples) | Worked examples for MLX, from text generation to fine-tuning. | MIT | 9.0k | 2026-04-06 |
+| [apple/corenet](https://github.com/apple/corenet) | Apple's own toolkit for training small and large models, for language and vision. | see repo | 7.0k | 2026-09-25 |
 
 ## Fine-tuning libraries
 
@@ -28,6 +31,7 @@ Pick one. They all do LoRA/QLoRA; they differ in speed, memory use and how much 
 | [axolotl-ai-cloud/axolotl](https://github.com/axolotl-ai-cloud/axolotl) | Config-file driven fine-tuning of many models, single GPU to multi-GPU. | Apache-2.0 | 13k | 2026-10-30 |
 | [hiyouga/LlamaFactory](https://github.com/hiyouga/LlamaFactory) | A broad fine-tuning toolkit with a web UI, for many model families. | Apache-2.0 | 76k | 2026-10-29 |
 | [meta-pytorch/torchtune](https://github.com/meta-pytorch/torchtune) | PyTorch-native, readable fine-tuning recipes. | BSD-3-Clause | 5.8k | 2026-09-09 |
+| [huggingface/autotrain-advanced](https://github.com/huggingface/autotrain-advanced) | Fine-tune models with a config file or a UI and little code. | Apache-2.0 | 4.6k | 2026-10-29 |
 
 ## Run, quantize and serve
 
@@ -58,12 +62,71 @@ A model you cannot measure is a model you cannot improve.
 | [EleutherAI/lm-evaluation-harness](https://github.com/EleutherAI/lm-evaluation-harness) | The standard harness for benchmarking language models. | MIT | 14k | 2026-09-14 |
 | [huggingface/lighteval](https://github.com/huggingface/lighteval) | Lightweight evaluation toolkit from Hugging Face. | MIT | 2.6k | 2026-10-29 |
 
+## More ways to evaluate
+
+Beyond the general harnesses above, these fit code and structured-output models.
+
+| Project | What it is for | Licence | Stars | Updated |
+|---|---|---|---|---|
+| [evalplus/evalplus](https://github.com/evalplus/evalplus) | Stricter evaluation of code-generation models. | Apache-2.0 | 1.8k | 2025-10-02 |
+| [bigcode-project/bigcode-evaluation-harness](https://github.com/bigcode-project/bigcode-evaluation-harness) | A framework for evaluating code-generation language models. | Apache-2.0 | 1.1k | 2025-07-22 |
+| [confident-ai/deepeval](https://github.com/confident-ai/deepeval) | Unit-test style evaluation for LLM applications. | Apache-2.0 | 19k | 2026-10-29 |
+| [deepchecks/deepchecks](https://github.com/deepchecks/deepchecks) | Test and validate data and models, from research to production. | see repo | 4.1k | 2025-12-28 |
+
 ## Data
 
 | Project | What it is for | Licence | Stars | Updated |
 |---|---|---|---|---|
 | [huggingface/datasets](https://github.com/huggingface/datasets) | Load, share and process datasets of any size. | Apache-2.0 | 22k | 2026-10-30 |
 | [argilla-io/distilabel](https://github.com/argilla-io/distilabel) | Build synthetic datasets and feedback pipelines for fine-tuning. | Apache-2.0 | 3.4k | 2026-10-26 |
+
+## Track experiments and version data
+
+Training runs are easy to lose. These keep a record of what you ran, on which data, with which result.
+
+| Project | What it is for | Licence | Stars | Updated |
+|---|---|---|---|---|
+| [mlflow/mlflow](https://github.com/mlflow/mlflow) | Track runs and metrics, package models, and keep a model registry. | Apache-2.0 | 29k | 2026-10-30 |
+| [treeverse/dvc](https://github.com/treeverse/dvc) | Version datasets and models alongside your code, like git for data. | Apache-2.0 | 16k | 2026-10-26 |
+| [aimhubio/aim](https://github.com/aimhubio/aim) | A fast, self-hosted experiment tracker with a good comparison UI. | Apache-2.0 | 6.3k | 2026-10-29 |
+| [clearml/clearml](https://github.com/clearml/clearml) | Experiment tracking, orchestration and data management in one open-source suite. | Apache-2.0 | 6.9k | 2026-10-29 |
+| [iterative/cml](https://github.com/iterative/cml) | Run training and report results from CI, so every pull request shows its metrics. | Apache-2.0 | 4.2k | 2026-10-21 |
+| [treeverse/lakeFS](https://github.com/treeverse/lakeFS) | Git-like branches and commits for the data lake behind your training data. | see repo | 5.6k | 2026-10-30 |
+| [kitops-ml/kitops](https://github.com/kitops-ml/kitops) | Package a model, its data and code as one versioned, shareable artifact. | Apache-2.0 | 1.4k | 2026-10-26 |
+
+## Label and generate data
+
+Good data beats a bigger model. Tools for labelling, cleaning and synthesising it.
+
+| Project | What it is for | Licence | Stars | Updated |
+|---|---|---|---|---|
+| [argilla-io/argilla](https://github.com/argilla-io/argilla) | Collaborative labelling and feedback for LLM and NLP data. | Apache-2.0 | 5.2k | 2026-10-26 |
+| [HumanSignal/label-studio](https://github.com/HumanSignal/label-studio) | A flexible open-source labelling tool for text, audio, images and more. | Apache-2.0 | 29k | 2026-10-30 |
+| [cleanlab/cleanlab](https://github.com/cleanlab/cleanlab) | Find label errors and bad examples in a dataset automatically. | Apache-2.0 | 12k | 2026-01-13 |
+| [NVIDIA-NeMo/Curator](https://github.com/NVIDIA-NeMo/Curator) | Scalable data curation: filter, deduplicate and prepare training data. | Apache-2.0 | 1.8k | 2026-10-30 |
+| [sdv-dev/SDV](https://github.com/sdv-dev/SDV) | Generate realistic synthetic tabular data from a real dataset. | see repo | 3.6k | 2026-10-30 |
+
+## Shrink and compress models
+
+Smaller models run on cheaper hardware. Quantization is the usual first step.
+
+| Project | What it is for | Licence | Stars | Updated |
+|---|---|---|---|---|
+| [mit-han-lab/llm-awq](https://github.com/mit-han-lab/llm-awq) | Activation-aware 4-bit quantization for LLMs. | MIT | 3.7k | 2025-07-17 |
+| [huggingface/optimum-quanto](https://github.com/huggingface/optimum-quanto) | Simple quantization for PyTorch and Transformers models. | Apache-2.0 | 1.1k | 2026-10-26 |
+| [ggml-org/ggml](https://github.com/ggml-org/ggml) | The tensor library under llama.cpp, with its own quantization formats. | MIT | 16k | 2026-10-28 |
+| [intel/neural-compressor](https://github.com/intel/neural-compressor) | Quantization, pruning and distillation toolkit for many frameworks. | Apache-2.0 | 2.7k | 2026-10-30 |
+| [onnx/onnx](https://github.com/onnx/onnx) | An open format for moving models between frameworks and runtimes. | Apache-2.0 | 22k | 2026-10-30 |
+
+## Serve in production
+
+Once a model works, put it behind a reliable API.
+
+| Project | What it is for | Licence | Stars | Updated |
+|---|---|---|---|---|
+| [bentoml/BentoML](https://github.com/bentoml/BentoML) | Package a model as a service and deploy it anywhere. | Apache-2.0 | 8.9k | 2026-10-29 |
+| [exo-explore/exo](https://github.com/exo-explore/exo) | Run a large model across your own devices, Macs included. | Apache-2.0 | 48k | 2026-10-30 |
+| [dstackai/dstack](https://github.com/dstackai/dstack) | An open-source way to provision cloud GPUs for training and serving, without being tied to one provider. | MPL-2.0 | 2.3k | 2026-10-30 |
 
 ## Small open models with a clear licence
 
@@ -99,6 +162,14 @@ A full small-model project with its numbers published, including the failures.
 | Project | What it is for | Licence | Stars | Updated |
 |---|---|---|---|---|
 | [flisk-sh/flisk-model](https://github.com/flisk-sh/flisk-model) | Trains a 1.5B model on a MacBook to write Flisk config files, graded by the real validator, with Claude, Qwen and prompted baselines. | MIT | 0 | 2026-10-30 |
+
+## Related lists
+
+Other curated lists worth knowing.
+
+| Project | What it is for | Licence | Stars | Updated |
+|---|---|---|---|---|
+| [EthicalML/awesome-production-machine-learning](https://github.com/EthicalML/awesome-production-machine-learning) | A large curated list of open-source tools for production machine learning: serving, monitoring, data pipelines and more. Several entries above were found through it. | MIT | 21k | 2026-10-28 |
 
 ## Lessons from a real run
 
