@@ -1,5 +1,5 @@
 // node build.mjs [--check] : verifies every entry against its live source and rebuilds README.md.
-// --check fails (exit 1) if any entry is dead, renamed, or archived, without writing anything.
+// Both modes fail if any entry cannot be verified. --check never writes anything.
 import { readFileSync, writeFileSync } from "node:fs";
 import { execFileSync } from "node:child_process";
 
@@ -76,6 +76,6 @@ From training a 1.5B model on a MacBook ([full numbers and failures](https://git
 `;
 const slug = (t) => t.toLowerCase().replace(/[^a-z0-9 -]/g, "").replace(/ /g, "-");
 out = out.replace("<!--TOC-->", "**Contents:** " + [...list.sections.map((x) => x.title), "Lessons from a real run"].map((t) => `[${t}](#${slug(t)})`).join(" · "));
-if (problems.length) { console.error("Problems:\n  " + problems.join("\n  ")); if (checkOnly) process.exit(1); }
-if (!checkOnly) { writeFileSync("README.md", out); console.log(`README.md written (${list.sections.reduce((n, s) => n + s.items.length, 0)} entries, ${problems.length} problems)`); }
+if (problems.length) { console.error("Problems:\n  " + problems.join("\n  ")); process.exit(1); }
+if (!checkOnly) { writeFileSync("README.md", out); console.log(`README.md written (${list.sections.reduce((n, s) => n + s.items.length, 0)} entries, 0 problems)`); }
 else console.log("all entries verified");
