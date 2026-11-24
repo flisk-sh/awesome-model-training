@@ -1,5 +1,7 @@
 // node build.mjs [--check] : verifies every entry against its live source and rebuilds README.md.
-// Both modes fail if any entry cannot be verified. --check never writes anything.
+// Both modes fail if any entry cannot be verified. --check never writes anything, and it also fails
+// when the published README.md differs from a fresh build in anything but the live numbers, so the
+// list can only change through list.json plus a rebuild, never through a hand edit to README.md.
 import { readFileSync, writeFileSync } from "node:fs";
 import { execFileSync } from "node:child_process";
 
@@ -70,12 +72,33 @@ From training a 1.5B model on a MacBook ([full numbers and failures](https://git
 
 ## How it stays honest
 
-\`node build.mjs\` reads \`list.json\`, checks every entry against GitHub or Hugging Face, and rewrites this file. \`node build.mjs --check\` runs in CI and fails on a dead, renamed or archived entry. To add something, edit \`list.json\` and open a pull request: it must pass the check.
+\`node build.mjs\` reads \`list.json\`, checks every entry against GitHub or Hugging Face, and rewrites this file. \`node build.mjs --check\` runs in CI and fails on a dead, renamed or archived entry, and on a README that was edited by hand instead of rebuilt. To add something, edit \`list.json\`, run \`node build.mjs\` and open a pull request: it must pass the check.
 
 [MIT](LICENSE)
 `;
 const slug = (t) => t.toLowerCase().replace(/[^a-z0-9 -]/g, "").replace(/ /g, "-");
 out = out.replace("<!--TOC-->", "**Contents:** " + [...list.sections.map((x) => x.title), "Lessons from a real run"].map((t) => `[${t}](#${slug(t)})`).join(" · "));
+
+// The part of the README that comes from list.json and the templates, with the live numbers blanked.
+// In a table row the first two cells (the link and what it is for) are kept; licence, stars,
+// commercial-use and updated are live data that drifts between builds, so they are replaced. The
+// "Last checked" build date is replaced too. Everything else must match exactly, which makes a hand
+// edit to README.md fail --check the same way a dead link does.
+const stable = (s) =>
+	s
+		.replace(/Last checked: \d{4}-\d{2}-\d{2}/, "Last checked: <date>")
+		.replace(/^\| (\[[^\n]*?) \| ([^\n]*?) \|[^\n]*$/gm, "| $1 | $2 | <live> |");
+
 if (problems.length) { console.error("Problems:\n  " + problems.join("\n  ")); process.exit(1); }
 if (!checkOnly) { writeFileSync("README.md", out); console.log(`README.md written (${list.sections.reduce((n, s) => n + s.items.length, 0)} entries, 0 problems)`); }
-else console.log("all entries verified");
+else {
+	let published = null;
+	try { published = readFileSync("README.md", "utf-8"); } catch { /* missing file reports below */ }
+	if (published === null || stable(published) !== stable(out)) {
+		console.error(published === null
+			? "README.md is missing. Run node build.mjs to generate it."
+			: "README.md does not match a fresh build. Edit list.json, then run node build.mjs; never edit README.md by hand.");
+		process.exit(1);
+	}
+	console.log("all entries verified and README.md matches the build");
+}

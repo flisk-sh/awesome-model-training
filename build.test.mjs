@@ -36,6 +36,7 @@ function fixture(t, status) {
       "--import", `data:text/javascript,${encodeURIComponent(preload)}`, build, ...args,
     ], { cwd, encoding: "utf8", env: { ...process.env, GITHUB_TOKEN: "fixture" } }),
     read: () => readFileSync(readme, "utf8"),
+    write: (text) => writeFileSync(readme, text),
   };
 }
 
@@ -49,12 +50,28 @@ test("preserves the published README when a source is unavailable", (t) => {
   }
 });
 
-test("writes the complete list only when all sources verify", (t) => {
+test("writes the complete list only when all sources verify, and --check passes on the fresh README", (t) => {
   const { run, read } = fixture(t, 200);
-  assert.equal(run("--check").status, 0);
+  // --check also compares README.md to a fresh build, so it fails on the stub README
+  // and passes once build.mjs has written the real one.
+  assert.equal(run("--check").status, 1);
   assert.equal(read(), previous);
   const result = run();
   assert.equal(result.status, 0, result.stderr);
   assert.ok(read().includes(`[First](${first})`));
   assert.ok(read().includes(`[Second](${second})`));
+  const checked = run("--check");
+  assert.equal(checked.status, 0, checked.stderr);
+});
+
+// A hand edit to README.md used to pass --check, which only asked whether the sources were alive.
+// Now the published file is compared to a fresh build with the live numbers blanked, so an
+// unverified edit fails the same way a dead link does.
+test("fails --check when the published README was edited by hand", (t) => {
+  const { run, read, write } = fixture(t, 200);
+  assert.equal(run().status, 0, "build must write a matching README first");
+  write(read().replace("First resource", "Hand-typed claim"));
+  const result = run("--check");
+  assert.equal(result.status, 1);
+  assert.match(result.stderr, /does not match a fresh build/);
 });
